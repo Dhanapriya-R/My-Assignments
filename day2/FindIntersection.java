@@ -1,25 +1,51 @@
-package day2;
+package week3.day2;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class FindIntersection {
+
+//Create a main class
+public static void main (String[] args)
+{
+
+//Declare list1 method 
+List <Integer> list1 = new ArrayList <Integer> ();
+
+//Add input variable for list1
+list1.add(3);
+list1.add(2);
+list1.add(11);
+list1.add(4);
+list1.add(6);
+list1.add(7);
+
+//Declare list2 method
+List <Integer> list2 = new ArrayList <Integer> ();
+
+//Add input variable for list2
+list2.add(1);
+list2.add(2);
+list2.add(8);
+list2.add(4);
+list2.add(9);
+list2.add(7);
+
+//iterate inner loop for list1
+for (int i=0; i<list1.size(); i++)
+{
 	
-	public static void main (String[] args )
+//iterate inner loop for list1
+	for (int j=0; j<list2.size(); j++)
 	{
-		//Declare An array for {3,2,11,4,6,7};
-		int [] arr1 = {3,2,11,4,6,7};	
-		//Declare another array for {1,2,8,4,9,7};
-		int [] arr2 = {1,2,8,4,9,7};	
-		 //Declare for loop iterator from 0 to array length
-		for (int i=0; i<arr1.length; i++)
-		{
-			//Declare a nested for another array from 0 to array length
-			for (int j=0; j<arr2.length; j++)
-			{
-				//Compare Both the arrays using a condition statement
-		if (arr1[i] == arr2[j])
-			//Print the first array (should match item in both arrays)
-			System.out.println (arr1[i]);
 		
+//Condition to check data in list1 equals to element in list2
+		if(list1.get(i)==list2.get(j))
+			
+//System output print when data is equal
+				System.out.println(list1.get(i));
 	}
-		}
-	}
+}
+	
+}
 }
