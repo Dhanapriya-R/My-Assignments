@@ -1,23 +1,40 @@
 package annotation.leaftabs.ui;
 
+import java.io.IOException;
 import java.time.Duration;
 
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.DataProvider;
+import org.testng.annotations.Parameters;
+
+import com.leaftabs.ui.utils.ReadExcelData;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class ProjectSpecificMethods {
 
-	public ChromeDriver driver;
+	public RemoteWebDriver driver;
+	public String excelFileName;
+	@Parameters ({"url","browser"})
 	@BeforeMethod
-	public void BM()
+	public void BM(String url, String browser)
 	{
+		if (browser.equalsIgnoreCase("chrome"))
+		{
 		WebDriverManager.chromedriver().setup();
 		 driver = new ChromeDriver();
+		}
+		else if (browser.equalsIgnoreCase("edge"))
+		{
+			WebDriverManager.edgedriver().setup();
+			 driver = new EdgeDriver();
+		}
 		driver.manage().window().maximize();
-		driver.get("http://leaftaps.com/opentaps/");
+		driver.get(url);
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
 	}
 	
@@ -25,5 +42,13 @@ public class ProjectSpecificMethods {
 	public void AM()
 	{
 		driver.close();
+	}
+	
+	@DataProvider
+	public String[][] sendData() throws IOException
+	{
+		String[][] data = ReadExcelData.getData(excelFileName);
+		return data;
+		
 	}
 }

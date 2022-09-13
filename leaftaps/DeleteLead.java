@@ -1,11 +1,8 @@
 package leaftaps;
-
-
-	
 	import java.time.Duration;
-
 	import org.openqa.selenium.By;
 	import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import annotation.leaftabs.ui.ProjectSpecificMethods;
@@ -13,12 +10,17 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 
 	public class DeleteLead extends ProjectSpecificMethods {
 		
-		@Test
+		@BeforeTest
+		public void setData()
+		{
+			  excelFileName = "tc002";
+		}
+		@Test(dataProvider = "sendData")
 
-		public  void runDeleteLead() throws InterruptedException {
+		public void runDeleteLead(String username, String password) throws InterruptedException {
 			
-			driver.findElement(By.id("username")).sendKeys("DemoSalesManager");
-			driver.findElement(By.id("password")).sendKeys("crmsfa");
+			driver.findElement(By.id("username")).sendKeys(username);
+			driver.findElement(By.id("password")).sendKeys(password);
 			driver.findElement(By.className("decorativeSubmit")).click();
 			driver.findElement(By.linkText("CRM/SFA")).click();
 			driver.findElement(By.linkText("Leads")).click();

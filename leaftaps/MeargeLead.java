@@ -8,20 +8,27 @@ package leaftaps;
 
 	import org.openqa.selenium.By;
 	import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import annotation.leaftabs.ui.ProjectSpecificMethods;
-import io.github.bonigarcia.wdm.WebDriverManager;
+
 
 	public class MeargeLead extends ProjectSpecificMethods{
-@Test
-		public  void runMeargeLead() throws InterruptedException {
+		@BeforeTest
+		public void getData()
+		{
+			excelFileName = "tc005";
+		}
+@Test(dataProvider = "sendData")
+		public  void runMeargeLead(String username, String password) throws InterruptedException {
 			
-			driver.findElement(By.id("username")).sendKeys("DemoSalesManager");
-			driver.findElement(By.id("password")).sendKeys("crmsfa");
+			driver.findElement(By.id("username")).sendKeys(username);
+			driver.findElement(By.id("password")).sendKeys(password);
 			driver.findElement(By.className("decorativeSubmit")).click();
 			driver.findElement(By.linkText("CRM/SFA")).click();
 			driver.findElement(By.linkText("Leads")).click();
+			Thread.sleep(5000);
 			driver.findElement(By.linkText("Merge Leads")).click();
 			driver.findElement(By.xpath("//img[@alt='Lookup']")).click();
 			Set<String> allWindows = driver.getWindowHandles();
