@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Leaftabs automation" verbose='5'>
+<parameter name="url" value="http://leaftaps.com/opentaps/"/>
+<parameter name="browser" value="chrome"/>
+  <test thread-count="5" name="Create-Lead-Test">
+    <classes>
+      <class name="com.leaftabs.ui.test.CreateLead"/>
+    </classes>
+  </test> <!-- Test -->
+</suite> <!-- Suite -->
